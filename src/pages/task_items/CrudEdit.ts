@@ -9,17 +9,61 @@ const CrudEdit = {
    * @param key: any
    *
    * @return
+   */      
+  porjectGet: async function(id: number) : Promise<any>
+  {
+    try{
+      let item: any = {
+        "id": id
+      };
+      const json = await HttpCommon.server_post(item, "/project/get");
+//console.log(json);       
+      item = json.data;
+//console.log(item);
+      return item;      
+    } catch (e) {
+      console.error(e);
+    }
+  },  
+  /**
+   * get:
+   * @param key: any
+   *
+   * @return
+   */      
+  get: async function(id: number) : Promise<any>
+  {
+    try{
+      let item: any = {
+        "id": id
+      };
+      const json = await HttpCommon.server_post(item, "/tasks/get");
+//console.log(json);       
+      item = json.data;
+console.log(item);
+      return item;      
+    } catch (e) {
+      console.error(e);
+    }
+  },  
+  /**
+   *
+   * @param key: any
+   *
+   * @return
    */
-  update : async function() : Promise<any>
+  update : async function(id: number, selected : number) : Promise<any>
   {
     try{
       let ret = false;
-      const elm: any = document.querySelector('#item_id');
-      const id = elm?.value;  
       let values = Crud.getInputValues();  
+      const complete = (<HTMLInputElement>document.querySelector("#complete")).value;
       values.id = Number(id);
+      values.complete = complete;
+      values.status = String(selected);
   console.log(values);
-      const json = await HttpCommon.server_post(values, '/todos/update');
+  //return;
+      const json = await HttpCommon.server_post(values, '/tasks/update');
       console.log(json);
       if (json.ret ===  LibConfig.OK_CODE) {
         ret = true;
@@ -40,28 +84,12 @@ const CrudEdit = {
   {
     try{
       console.log("#startProc");
-      //
-      const hid_completed: any = document.querySelector('#item_completed');
-      const hid_completed_value = hid_completed?.value;      
-      const completed = (<HTMLInputElement>document.querySelector("#completed"));
-      if(Number(hid_completed_value) === 1) {
-        completed.checked = true;
-      }
-      //btn
-      const button: any = document.querySelector('#btn_save');
-      button.addEventListener('click', async() => {
-        const res = await this.update();
-console.log("res=", res);
-      if(res) {
-        window.location.href = '/todo';	
-      }
-      }); 
     } catch (e) {
       console.error(e);
     }    
   } 
 }
 //
-CrudEdit.startProc();
+//CrudEdit.startProc();
 
 export default CrudEdit;

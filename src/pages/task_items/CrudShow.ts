@@ -1,9 +1,29 @@
 import LibCrud from '../../lib/LibCrud';
 import LibConfig from '../../lib/LibConfig';
 import HttpCommon from '../../lib/HttpCommon';
-//import { marked } from 'marked';
 //
 const Crud = {
+  /**
+   *
+   * @param key: any
+   *
+   * @return
+   */      
+  porjectGet: async function(id: number) : Promise<any>
+  {
+    try{
+      let item: any = {
+        "id": id
+      };
+      const json = await HttpCommon.post(item, "/project/get");
+//console.log(json);       
+      item = json.data;
+//console.log(item);
+      return item;      
+    } catch (e) {
+      console.error(e);
+    }
+  },
   /**
    * get:
    * @param key: any
@@ -19,12 +39,12 @@ const Crud = {
       const json = await HttpCommon.post(item, "/tasks/get");
 //console.log(json);       
       item = json.data;
-console.log(item);
+//console.log(item);
       return item;      
     } catch (e) {
       console.error(e);
     }
-  },  
+  },
   /**
    * delete:
    * @param key: any

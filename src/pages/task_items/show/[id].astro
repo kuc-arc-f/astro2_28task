@@ -4,7 +4,7 @@ import LibCrud from '../../../lib/LibCrud';
 import CrudShow from '../CrudShow';
 import ProjectShow from '../../task_project/CrudShow';
 import HttpCommon from '../../lib/HttpCommon';
-import App from './App.svelte';
+import LibCommon from "../../../lib/LibCommon";
 //
 const { id } = Astro.params;
 console.log(id);
@@ -12,9 +12,10 @@ let postItem: any = {
     "id": id
 };
 let item: any = await CrudShow.get(Number(id));
-console.log(item);       
-//let projectItem: any = await ProjectShow.get(Number(item.projectId));
+let projectItem: any = await CrudShow.porjectGet(Number(item.projectId));
 //console.log(projectItem);
+item.complete = LibCommon.converDateString(item.complete);
+//console.log(item);       
 
 ---
 
@@ -25,9 +26,7 @@ console.log(item);
 <!-- MarkUp -->
 <Layout title="Welcome to Astro.">
     <main class="container">
-    <!--
-        <a class="btn btn-outline-primary" href={`/task_project/show/${id}`}>Back</a>
-    -->
+        <a class="btn btn-outline-primary" href={`/task_project/show/${projectItem.id}`}>Back</a>
         <hr />		
         <h1>{item.title}</h1>
         <p>Id:{id}</p>

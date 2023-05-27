@@ -23,10 +23,10 @@ if(status === '2'){
               <i class="bi bi-clipboard"></i>
             </div>
             <div class="card_col_body  p-md-2">
-              <a href={`/task_items/show/${id}`}>
-                <span class="task_title fs-5">{title}
-                </span>
-                </a>
+              <a href={`/task_items/show/${id}`}><span class="task_title fs-5">{title}</span>
+              </a>
+              <a href={`/task_items/edit/${id}`}><span class="task_title mx-2">[Edit]</span>
+              </a>
               <br />
               <span>date, ID: {id}</span>
             </div>
