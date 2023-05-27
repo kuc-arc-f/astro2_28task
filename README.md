@@ -6,7 +6,7 @@
 
  date    : 2023/05/26
 
- update  : 2023/05/27
+ update  : 2023/05/28
 
 ***
 ### Summary
@@ -54,6 +54,8 @@ yarn build
 
 ***
 ### blog
+
+https://zenn.dev/knaka0209/books/b5e25eac05b2c5
 
 ***
 
